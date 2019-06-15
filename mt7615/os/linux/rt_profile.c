@@ -99,8 +99,8 @@ int (*wf_ra_sw_nat_hook_rx_bkup)(struct sk_buff *skb);
 #define def_to_str(s)    #s
 
 #define FIRST_EEPROM_FILE_PATH	"/etc_ro/Wireless/RT2860/"
-#define FIRST_AP_PROFILE_PATH		"/etc/Wireless/RT2860/RT2860.dat"
-#define FIRST_STA_PROFILE_PATH      "/etc/Wireless/RT2860/RT2860.dat"
+#define FIRST_AP_PROFILE_PATH		"/etc/Wireless/RT2860/RT2860AP.dat"
+#define FIRST_STA_PROFILE_PATH      "/etc/Wireless/RT2860/RT2860AP.dat"
 #define FIRST_CHIP_ID	xdef_to_str(CONFIG_RT_FIRST_CARD)
 
 #define SECOND_EEPROM_FILE_PATH	"/etc_ro/Wireless/iNIC/"

@@ -138,14 +138,14 @@ typedef struct usb_ctrlrequest devctrlrequest;
 #define AP_PROFILE_PATH			"/etc/Wireless/iNIC/iNIC_ap.dat"
 #define AP_RTMP_FIRMWARE_FILE_NAME "/etc_ro/Wireless/iNIC/RT2860AP.bin"
 #else
-#define AP_PROFILE_PATH			"/etc/Wireless/RT2860AP/RT2860AP.dat"
-#define AP_RTMP_FIRMWARE_FILE_NAME "/etc/Wireless/RT2860AP/RT2860AP.bin"
+#define AP_PROFILE_PATH			"/etc/Wireless/RT2860/RT2860AP.dat"
+#define AP_RTMP_FIRMWARE_FILE_NAME "/etc/Wireless/RT2860/RT2860AP.bin"
 #endif
 
 
 #define AP_DRIVER_VERSION			"5.0.2.0"
 #ifdef MULTIPLE_CARD_SUPPORT
-#define CARD_INFO_PATH			"/etc/Wireless/RT2860AP/RT2860APCard.dat"
+#define CARD_INFO_PATH			"/etc/Wireless/RT2860/RT2860APCard.dat"
 #endif /* MULTIPLE_CARD_SUPPORT */
 #endif /* RTMP_MAC_PCI */
 
@@ -153,15 +153,15 @@ typedef struct usb_ctrlrequest devctrlrequest;
 
 #ifdef RTMP_RBUS_SUPPORT
 /* This used for rbus-based chip, maybe we can integrate it together. */
-#define RTMP_FIRMWARE_FILE_NAME		"/etc_ro/Wireless/RT2860AP/RT2860AP.bin"
+#define RTMP_FIRMWARE_FILE_NAME		"/etc_ro/Wireless/RT2860/RT2860AP.bin"
 #define PROFILE_PATH			"/etc/Wireless/RT2860i.dat"
-#define AP_PROFILE_PATH_RBUS		"/etc/Wireless/RT2860/RT2860.dat"
+#define AP_PROFILE_PATH_RBUS		"/etc/Wireless/RT2860/RT2860AP.dat"
 #define RT2880_AP_DRIVER_VERSION	"1.0.0.0"
 #endif /* RTMP_RBUS_SUPPORT */
 
 #ifdef SINGLE_SKU_V2
-#define SINGLE_SKU_TABLE_FILE_NAME	"/etc_ro/Wireless/RT2860AP/SingleSKU.dat"
-#define BF_SKU_TABLE_FILE_NAME      "/etc_ro/Wireless/RT2860AP/SingleSKU_BF.dat"
+#define SINGLE_SKU_TABLE_FILE_NAME	"/etc_ro/Wireless/SingleSKU_mt7615e-sku.dat"
+#define BF_SKU_TABLE_FILE_NAME      "/etc_ro/Wireless/SingleSKU_mt7615e-sku-bf.dat"
 #endif /* SINGLE_SKU_V2 */
 
 #endif /* CONFIG_AP_SUPPORT */
