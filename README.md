@@ -52,10 +52,6 @@ CONFIG_FIRST_IF_EPAELNA=y
 CONFIG_SECOND_IF_EPAELNA=y
 # CONFIG_SECOND_IF_IPAILNA is not set
 # CONFIG_SECOND_IF_IPAELNA is not set
-# CONFIG_FIRST_IF_IPAILNA is not set
-# CONFIG_FIRST_IF_IPAELNA is not set
-# CONFIG_SECOND_IF_IPAILNA is not set
-# CONFIG_SECOND_IF_IPAELNA is not set
 # CONFIG_THIRD_IF_EPAELNA is not set
 # CONFIG_THIRD_IF_IPAILNA is not set
 # CONFIG_THIRD_IF_IPAELNA is not set
@@ -106,11 +102,11 @@ CONFIG_MT_MAC=y
   #define SSURV_LINE_LEN		(4+33+20+23+9+7+7+3)
   #define SSURV_LINE_LEN_WPS	(4+33+20+23+9+7+7+3+4+5)  
   ```
-  as:
+  to:
   ``` bash
   #define SSURV_LINE_LEN		(4+4+33+20+23+9+7+7+3+8+10)	
   #define SSURV_LINE_LEN_WPS	(4+4+33+20+23+9+7+7+3+8+4+5+10)
   ``` 
-  then, you should modify ralink.c likes this link: 
+  then, you should modify ralink.c following these links: 
   1. [mt7615 & K2P: enable wps and apcli](https://github.com/ferhung-mtk/rt-n56u/commit/27f1e1ee95e0f6d0e9dae7922c75ee801982eb95)
   2. [mt7615: fix scaning list of wps & apcli at 5GHz page.](https://github.com/ferhung-mtk/rt-n56u/commit/141f3b4dddd8a897da9d2ff8a2e14480eb9f20d3)
