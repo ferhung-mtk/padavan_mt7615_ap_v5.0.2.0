@@ -2955,7 +2955,7 @@ VOID RTMPCommSiteSurveyData(
 	else if (wireless_mode == Ndis802_11OFDM5_N)
 		sprintf(msg + strlen(msg), "%-7s", "11a/n");
 	else if (wireless_mode == Ndis802_11OFDM5_AC)
-		sprintf(msg + strlen(msg), "%-8s", "11a/n/ac");
+		sprintf(msg + strlen(msg), "%-7s", "11a/n/ac");
 	else if (wireless_mode == Ndis802_11OFDM24)
 		sprintf(msg + strlen(msg), "%-7s", "11b/g");
 	else if (wireless_mode == Ndis802_11OFDM24_N)
@@ -2983,7 +2983,7 @@ VOID RTMPCommSiteSurveyData(
 	/* SSID Length */
 	sprintf(msg + strlen(msg), " %-8d", pBss->SsidLen);
 
-	sprintf(msg + strlen(msg), "\n");
+	//sprintf(msg + strlen(msg), "\n");
 	return;
 }
 
@@ -3085,11 +3085,11 @@ VOID RTMPIoctlGetSiteSurvey(
 		return;
 	}
 
-	sprintf(msg, "%s", "\n");
-	sprintf(msg + strlen(msg), "Total=%-4d", pAdapter->ScanTab.BssNr);
-	sprintf(msg + strlen(msg), "%s", "\n");
+	//sprintf(msg, "%s", "\n");
+	//sprintf(msg + strlen(msg), "Total=%-4d", pAdapter->ScanTab.BssNr);
+	//sprintf(msg + strlen(msg), "%s", "\n");
 	sprintf(msg + strlen(msg), "%-4s%-4s%-33s%-20s%-23s%-9s%-7s%-7s%-3s%-8s\n",
-			"No", "Ch", "SSID", "BSSID", "Security", "Siganl(%)", "W-Mode", " ExtCH", " NT", " SSID_Len");
+			"No", "Ch", "SSID", "BSSID", "Security", "Signal(%)", "W-Mode", " ExtCH", " NT", " SSID_Len");
 #ifdef WSC_INCLUDED
 	sprintf(msg + strlen(msg) - 1, "%-4s%-5s\n", " WPS", " DPID");
 #endif /* WSC_INCLUDED */
@@ -3128,7 +3128,7 @@ VOID RTMPIoctlGetSiteSurvey(
 			sprintf(msg + strlen(msg), "%-5s", " ");
 
 #endif /* WSC_INCLUDED */
-		sprintf(msg + strlen(msg), "%-7s\n", pBss->FromBcnReport ? " YES" : " NO");
+		sprintf(msg + strlen(msg), "%-10s\n", pBss->FromBcnReport ? " YES" : " NO");
 	}
 
 	wrq->u.data.length = strlen(msg);
