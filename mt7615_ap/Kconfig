@@ -1,3 +1,7 @@
+config MT7615_AP
+	tristate "MT7615 AP support"
+	select MT_AP_SUPPORT
+	
 config MT_AP_SUPPORT
 	tristate "MTK AP support"
 #	depends on NET_RADIO

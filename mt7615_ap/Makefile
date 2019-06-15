@@ -1,76 +1,42 @@
-ifeq ($(CONFIG_SUPPORT_OPENWRT),y)
-WIFI_DRV_PATH := $(shell dirname $(realpath $(lastword $(MAKEFILE_LIST))))/..
-else
-ifeq ($(CONFIG_DEFAULTS_KERNEL_4_4),y)
-WIFI_DRV_PATH = drivers/net/wireless/mediatek
-else
-WIFI_DRV_PATH = drivers/net/wireless
-endif
-endif
-
-EXTRA_CFLAGS = -I$(WIFI_DRV_PATH)/mt_wifi/include \
-				-I$(WIFI_DRV_PATH)/mt_wifi/embedded/include \
-				-I$(WIFI_DRV_PATH)/mt_wifi/ate/include \
-				-I$(WIFI_DRV_PATH)/mt_wifi/include/mcu
-
-DRV_NAME = mt_wifi
-SRC_DIR = ../mt_wifi
-SRC_EMBEDDED_DIR = ../mt_wifi/embedded
-ifeq ($(CONFIG_SUPPORT_OPENWRT),y)
-EXTRA_CFLAGS += -DCONFIG_SUPPORT_OPENWRT
-ifneq ($(CONFIG_RT_FIRST_CARD),)
-EXTRA_CFLAGS += -DCONFIG_RT_FIRST_CARD=$(CONFIG_RT_FIRST_CARD)
-EXTRA_CFLAGS += -DCONFIG_RT_FIRST_IF_RF_OFFSET=$(CONFIG_RT_FIRST_IF_RF_OFFSET)
-endif
-ifneq ($(CONFIG_RT_SECOND_CARD),)
-EXTRA_CFLAGS += -DCONFIG_RT_SECOND_CARD=$(CONFIG_RT_SECOND_CARD)
-EXTRA_CFLAGS += -DCONFIG_RT_SECOND_IF_RF_OFFSET=$(CONFIG_RT_SECOND_IF_RF_OFFSET)
-endif
-ifneq ($(CONFIG_RT_THIRD_CARD),)
-EXTRA_CFLAGS += -DCONFIG_RT_THIRD_CARD=$(CONFIG_RT_THIRD_CARD)
-EXTRA_CFLAGS += -DCONFIG_RT_THIRD_IF_RF_OFFSET=$(CONFIG_RT_THIRD_IF_RF_OFFSET)
-endif
-ifeq ($(CONFIG_FIRST_IF_EEPROM_PROM),y)
+################################################################################
+ifeq ($(CONFIG_RT_FIRST_IF_EEPROM_PROM),y)
 EXTRA_CFLAGS += -DCONFIG_RT_FIRST_CARD_EEPROM="\"prom\""
-else
-ifeq ($(CONFIG_FIRST_IF_EEPROM_EFUSE),y)
+endif
+ifeq ($(CONFIG_RT_FIRST_IF_EEPROM_EFUSE),y)
 EXTRA_CFLAGS += -DCONFIG_RT_FIRST_CARD_EEPROM="\"efuse\""
-else
-ifeq ($(CONFIG_FIRST_IF_EEPROM_FLASH),y)
+endif
+ifeq ($(CONFIG_RT_FIRST_IF_EEPROM_FLASH),y)
 EXTRA_CFLAGS += -DCONFIG_RT_FIRST_CARD_EEPROM="\"flash\""
 endif
-endif
-endif
-ifeq ($(CONFIG_SECOND_IF_EEPROM_PROM),y)
+
+ifeq ($(CONFIG_RT_SECOND_IF_EEPROM_PROM),y)
 EXTRA_CFLAGS += -DCONFIG_RT_SECOND_CARD_EEPROM="\"prom\""
-else
-ifeq ($(CONFIG_SECOND_IF_EEPROM_EFUSE),y)
+endif
+ifeq ($(CONFIG_RT_SECOND_IF_EEPROM_EFUSE),y)
 EXTRA_CFLAGS += -DCONFIG_RT_SECOND_CARD_EEPROM="\"efuse\""
-else
-ifeq ($(CONFIG_SECOND_IF_EEPROM_FLASH),y)
+endif
+ifeq ($(CONFIG_RT_SECOND_IF_EEPROM_FLASH),y)
 EXTRA_CFLAGS += -DCONFIG_RT_SECOND_CARD_EEPROM="\"flash\""
 endif
-endif
-endif
-ifeq ($(CONFIG_THIRD_IF_EEPROM_PROM),y)
+
+ifeq ($(CONFIG_RT_THIRD_IF_EEPROM_PROM),y)
 EXTRA_CFLAGS += -DCONFIG_RT_THIRD_CARD_EEPROM="\"prom\""
-else
-ifeq ($(CONFIG_THIRD_IF_EEPROM_EFUSE),y)
+endif
+ifeq ($(CONFIG_RT_THIRD_IF_EEPROM_EFUSE),y)
 EXTRA_CFLAGS += -DCONFIG_RT_THIRD_CARD_EEPROM="\"efuse\""
-else
-ifeq ($(CONFIG_THIRD_IF_EEPROM_FLASH),y)
+endif
+ifeq ($(CONFIG_RT_THIRD_IF_EEPROM_FLASH),y)
 EXTRA_CFLAGS += -DCONFIG_RT_THIRD_CARD_EEPROM="\"flash\""
 endif
-endif
-endif
-obj-m += $(DRV_NAME).o
-else
-obj-$(CONFIG_MT_AP_SUPPORT) += $(DRV_NAME).o
-endif
 
-ifeq ($(CONFIG_MTK_EMI_7622),y)
-EXTRA_CFLAGS += -DCONFIG_ARCH_MT7622
-endif
+################################################################################
+EXTRA_CFLAGS = -Idrivers/net/wireless/ralink/mt7615/include \
+				-Idrivers/net/wireless/ralink/mt7615/embedded/include \
+				-Idrivers/net/wireless/ralink/mt7615/ate/include
+DRV_NAME = mt7615_ap
+SRC_DIR = ../mt7615
+SRC_EMBEDDED_DIR = ../mt7615/embedded
+obj-$(CONFIG_MT_AP_SUPPORT) += $(DRV_NAME).o
 
 
 EXTRA_CFLAGS += -DWIFI_SYS_FW_V1
@@ -656,8 +622,8 @@ ifeq ($(CONFIG_EVENT_NOTIFIER_SUPPORT),y)
 endif
 
 #ifeq ($(CONFIG_WAPP),y)
-    EXTRA_CFLAGS += -DWAPP_SUPPORT
-    ap_objs +=  $(SRC_EMBEDDED_DIR)/wapp/wapp.o
+#    EXTRA_CFLAGS += -DWAPP_SUPPORT
+#    ap_objs +=  $(SRC_EMBEDDED_DIR)/wapp/wapp.o
 #endif
 
 ifeq ($(CONFIG_VOW_SUPPORT),y)
@@ -678,7 +644,8 @@ endif
 os_objs := $(SRC_DIR)/os/linux/rt_proc.o\
             $(SRC_DIR)/os/linux/rt_linux.o\
             $(SRC_DIR)/os/linux/rt_profile.o\
-            $(SRC_DIR)/os/linux/rt_main_dev.o
+            $(SRC_DIR)/os/linux/rt_main_dev.o\
+            $(SRC_DIR)/os/linux/mt_wifi_mtd.o
 
 ifeq ($(CONFIG_WLAN_HOOK),y)
 	EXTRA_CFLAGS +=-DRTMP_WLAN_HOOK_SUPPORT

@@ -3200,6 +3200,15 @@ VOID RTMPIoctlGetMacTableStaInfo(
 				else
 					need_send = FALSE;
 			}
+#if 1
+      /* [2018.11.01 hepark] To fill 5G information */
+      else if (!strcmp(wrq->ifr_ifrn.ifrn_name, "rai0")) {
+        if (!memcmp(pEntry->wdev->if_dev->name, "rax", 3))
+          need_send = FALSE;
+        else
+          need_send = TRUE;
+      }
+#endif
 		}
 		if (IS_ENTRY_CLIENT(pEntry) && (pEntry->Sst == SST_ASSOC) && (need_send == TRUE)) {
 			pDst = &pMacTab->Entry[pMacTab->Num];
