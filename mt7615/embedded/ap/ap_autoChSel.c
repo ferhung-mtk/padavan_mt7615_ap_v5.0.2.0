@@ -1281,8 +1281,7 @@ UCHAR APAutoSelectChannel(
 {
 	UCHAR ch = 0;
 
-	if (pAd->phy_op && pAd->phy_op->AutoCh)
-		ch = pAd->phy_op->AutoCh(pAd, pwdev, Alg, IsABand);
+	ch = SelectBestChannel(pAd, Alg, pwdev);
 
 	return ch;
 }
@@ -2119,4 +2118,3 @@ VOID AutoChannelSelCheck(RTMP_ADAPTER *pAd)
 	}
 }
 #endif /* AP_SCAN_SUPPORT */
-
